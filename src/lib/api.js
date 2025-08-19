@@ -1,4 +1,4 @@
-import { API_BASE, SAMPLE_MAPS } from "./constants";
+import { API_BASE } from "./constants";
 
 export async function fetchSamplesMapping(instrument) {
   const url = `${API_BASE}/api/samples?instrument=${instrument}`;

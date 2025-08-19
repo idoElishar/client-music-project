@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import "./Grid.css";
 
-export default function Grid({ rows, cols, grid, playhead, onToggle, cellSize = 36 }) {
+export default function Grid({ rows, cols, grid, playhead, onToggle,onStop, cellSize = 36 }) {
   const groups = useMemo(() => {
     const by = new Map();
     rows.forEach((r, idx) => {
@@ -41,9 +41,9 @@ export default function Grid({ rows, cols, grid, playhead, onToggle, cellSize = 
         {groups.map((g) => (
           <React.Fragment key={`group-${g.key}`}>
             <div className="groupHeader rowLabel" title={g.title}>
-              <button className="groupToggle" onClick={() => toggleGroup(g.key)}>
+              <div className="groupToggle" onClick={() => toggleGroup(g.key)}>
                 {open[g.key] ? "▾" : "▸"} {g.title}
-              </button>
+              </div>
             </div>
             {Array.from({ length: cols }).map((_, c) => (
               <div key={`gh-${g.key}-${c}`} className="groupHeaderCell" />
@@ -51,7 +51,9 @@ export default function Grid({ rows, cols, grid, playhead, onToggle, cellSize = 
 
             {open[g.key] &&
               g.rows.map(({ rowObj, rowIndex }) => (
+                
                 <React.Fragment key={rowObj.key}>
+                  
                   <div className="rowLabel">{rowObj.label}</div>
                   {Array.from({ length: cols }).map((_, c) => {
                     const active = grid[rowIndex]?.[c] ?? false;
@@ -59,7 +61,7 @@ export default function Grid({ rows, cols, grid, playhead, onToggle, cellSize = 
                     return (
                       <button
                         key={`${rowIndex}-${c}`}
-                        onClick={() => onToggle(rowIndex, c)}
+                        onClick={() => {onToggle(rowIndex, c),onStop()}}
                         className={`cell ${active ? "active" : ""} ${isPlayCol ? "playcol" : ""}`}
                         title={`${rowObj.label} – צעד ${c + 1}`}
                       >

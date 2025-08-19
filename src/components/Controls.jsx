@@ -1,20 +1,18 @@
 import React from "react";
+import "./Controls.css";
 
 export default function Controls({
   cols, setCols,
-  bpm, setBpm,            
+  bpm, setBpm,               
   loopEnabled, setLoopEnabled,
   volumeDb, setVolumeDb,
   isPlaying, onPlay, onStop, onRewind,
-  onLoadSamples, loadingSamples,
   onSave, onLoadLatest, stateIdToLoad, setStateIdToLoad, onLoadById,
   lastMessage,
   children
 }) {
-
   const baseBpm = 110;
   const speedFactor = +(bpm / baseBpm).toFixed(1);
-  const speedPercent = Math.round(((volumeDb + 60) / 60) * 100);
   const volumePercent = Math.round(((volumeDb + 60) / 60) * 100);
 
   return (
@@ -51,13 +49,11 @@ export default function Controls({
           />
           <div className="subNote">
             <span>×{speedFactor.toFixed(1)}</span>
-            <span className="dot">•</span>
-            <span>{bpm} BPM</span>
           </div>
         </label>
 
         <label className="ctrl">
-          <span className="ctrlLabel">עוצמה</span>
+          <span className="ctrlLabel">ווליום</span>
           <input
             type="range"
             min={0}
@@ -66,7 +62,7 @@ export default function Controls({
             value={volumePercent}
             onChange={(e) => {
               const percent = Number(e.target.value);
-              const db = (percent / 100) * 60 - 60; 
+              const db = (percent / 100) * 60 - 60;
               setVolumeDb(db);
             }}
             className="slider"
@@ -93,14 +89,7 @@ export default function Controls({
       </div>
 
       <div className="controlsGroup">
-        <button
-          onClick={onLoadSamples}
-          className="btn btnPrimary"
-          disabled={loadingSamples}
-          title="טען קבצי אודיו"
-        >
-          {loadingSamples ? "טוען דגימות..." : "טען דגימות"}
-        </button>
+       
 
         <button onClick={onSave} className="btn btnGhost">שמור מצב</button>
         <button onClick={onLoadLatest} className="btn btnGhost">טען מצב אחרון</button>
@@ -109,13 +98,12 @@ export default function Controls({
           <input
             value={stateIdToLoad}
             onChange={(e) => setStateIdToLoad(e.target.value)}
-            placeholder="מזהה מצב (ID)"
+            placeholder="טען מצב שמור לפי מזהה "
             className="input inputMd"
           />
           <button onClick={onLoadById} className="btn btnSecondary">טען</button>
         </div>
       </div>
-
       {lastMessage && <div className="toast">{lastMessage}</div>}
     </div>
   );
