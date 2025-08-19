@@ -18,7 +18,7 @@ export async function postSaveState(payload) {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    if (res.ok) return await res.json(); // { ok, id }
+    if (res.ok) return await res.json(); 
     return { ok: false };
   } catch {
     return { ok: false };

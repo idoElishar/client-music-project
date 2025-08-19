@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from "react";
 import "./App.css";
 import InstrumentPicker from "./components/InstrumentPicker";
@@ -111,11 +110,8 @@ export default function App() {
             <InstrumentPicker selected={selected} onToggle={toggleInstrument} />
           </Controls>
         </header>
-
         <Grid rows={rows} cols={cols} grid={grid} playhead={playhead} onToggle={toggleCell} />
-
         <p className="hint">
-          טיפ: אם לא שומעים צליל, ודא שהקלקת פעם אחת על כפתור <em>נגן</em> כדי לאפשר אודיו בדפדפן.
           {' '}<button className="btn btn-ghost" onClick={clearGrid}>נקה</button>
         </p>
       </div>

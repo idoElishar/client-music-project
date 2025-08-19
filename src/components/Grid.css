@@ -1,0 +1,91 @@
+.gridWrapper {
+    direction: rtl;
+    max-height: 70vh;        
+    overflow: auto;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(20,23,51,.06);
+  }
+  
+  .grid {
+    display: grid;
+    grid-auto-rows: var(--cell-size);
+    column-gap: 8px;
+    row-gap: 8px;
+    padding: 12px;
+  }
+  
+  .stickyHeader {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: #f7f8ff;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06);
+    border-radius: 8px;
+  }
+  
+  .rowLabel {
+    position: sticky;
+    right: 0;
+    z-index: 2;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #1e293b;
+    white-space: nowrap;
+    border-radius: 10px;
+  }
+  
+  .colHeader {
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    color: #64748b;
+    border-radius: 8px;
+  }
+  
+  .cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 10px;
+    background: #f3f6ff;
+    border: 1px solid #e5e7f2;
+    transition: transform .08s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .cell:hover { transform: translateY(-1px); }
+  .cell.active {
+    background: #5b5bd6;
+    border-color: #5b5bd6;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(91,91,214,.35);
+  }
+  .playcol:not(.active) { background: #fff7cc; }
+  
+  .groupHeader {
+    position: sticky;
+    right: 0;
+    z-index: 2;
+    background: #eef2ff;
+    border-radius: 10px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #334155;
+  }
+  .groupHeaderCell {
+    background: #eef2ff;
+    border-radius: 10px;
+  }
+  
+  .groupToggle {
+    all: unset;
+    cursor: pointer;
+    padding: 6px 6px;
+    border-radius: 8px;
+  }
+  .groupToggle:hover { background: rgba(0,0,0,.06); }
+  
