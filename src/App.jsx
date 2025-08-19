@@ -5,10 +5,10 @@ import Grid from "./components/Grid";
 import useAudioEngine from "./hooks/useAudioEngine";
 
 export default function App() {
-  const PIANO_NOTES  = useMemo(() => ["C4","D4","E4","F4","G4","A4","B4","C5"], []);
-  const GUITAR_NOTES = useMemo(() => ["E3","A3","D4","G4","B4","E5"], []);
-  const FLUTE_NOTES  = useMemo(() => ["C5","D5","E5","F5","G5","A5","B5","C6"], []);
-  const DRUM_ROWS    = useMemo(() => ["Kick","Snare","Hi-Hat"], []);
+  const PIANO_NOTES = useMemo(() => ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"], []);
+  const GUITAR_NOTES = useMemo(() => ["E3", "A3", "D4", "G4", "B4", "E5"], []);
+  const FLUTE_NOTES = useMemo(() => ["C5", "D5", "E5", "F5", "G5", "A5", "B5", "C6"], []);
+  const DRUM_ROWS = useMemo(() => ["Kick", "Snare", "Hi-Hat"], []);
 
   const [selected, setSelected] = useState({
     piano: true,
@@ -18,7 +18,7 @@ export default function App() {
   });
 
   const [cols, setCols] = useState(8);
-  const [bpm, setBpm] = useState(110);    
+  const [bpm, setBpm] = useState(110);
   const [loopEnabled, setLoopEnabled] = useState(true);
   const [volumeDb, setVolumeDb] = useState(-6);
 
@@ -27,10 +27,10 @@ export default function App() {
 
   const rows = useMemo(() => {
     const list = [];
-    if (selected.piano)  PIANO_NOTES.forEach(n => list.push({ key: `piano:${n}`,  inst: "piano",  label: `פסנתר ${n}`, value: n }));
+    if (selected.piano) PIANO_NOTES.forEach(n => list.push({ key: `piano:${n}`, inst: "piano", label: `פסנתר ${n}`, value: n }));
     if (selected.guitar) GUITAR_NOTES.forEach(n => list.push({ key: `guitar:${n}`, inst: "guitar", label: `גיטרה ${n}`, value: n }));
-    if (selected.flute)  FLUTE_NOTES.forEach(n => list.push({ key: `flute:${n}`,  inst: "flute",  label: `חליל ${n}`,  value: n }));
-    if (selected.drums)  DRUM_ROWS.forEach(p => list.push({ key: `drums:${p}`,    inst: "drums",  label: `תופים ${p}`, value: p }));
+    if (selected.flute) FLUTE_NOTES.forEach(n => list.push({ key: `flute:${n}`, inst: "flute", label: `חליל ${n}`, value: n }));
+    if (selected.drums) DRUM_ROWS.forEach(p => list.push({ key: `drums:${p}`, inst: "drums", label: `תופים ${p}`, value: p }));
     return list;
   }, [selected, PIANO_NOTES, GUITAR_NOTES, FLUTE_NOTES, DRUM_ROWS]);
 
@@ -146,6 +146,10 @@ export default function App() {
     if (!state) return setLastMessage("מצב לא נמצא לפי המזהה שסופק.");
     applyLoadedState(state);
   };
+  const clearGrid = () => {
+    setGrid(Array.from({ length: rows.length }, () => Array(cols).fill(false)));
+    setPlayhead(-1);
+  };
 
   return (
     <div className="app" dir="rtl">
@@ -173,10 +177,10 @@ export default function App() {
           >
             <fieldset className="control instruments">
               <legend>בחירת כלים</legend>
-              <label><input type="checkbox" checked={selected.piano}  onChange={() => toggleInstrument("piano")}  /> פסנתר</label>
-              <label><input type="checkbox" checked={selected.drums}  onChange={() => toggleInstrument("drums")}  /> תופים</label>
+              <label><input type="checkbox" checked={selected.piano} onChange={() => toggleInstrument("piano")} /> פסנתר</label>
+              <label><input type="checkbox" checked={selected.drums} onChange={() => toggleInstrument("drums")} /> תופים</label>
               <label><input type="checkbox" checked={selected.guitar} onChange={() => toggleInstrument("guitar")} /> גיטרה</label>
-              <label><input type="checkbox" checked={selected.flute}  onChange={() => toggleInstrument("flute")}  /> חליל</label>
+              <label><input type="checkbox" checked={selected.flute} onChange={() => toggleInstrument("flute")} /> חליל</label>
               <small className="hintInline">
                 * בחירה/ביטול כלי מוסיפה/מסירה שורות מלוח הנגינה.
               </small>
@@ -192,6 +196,9 @@ export default function App() {
           onToggle={toggleCell}
           cellSize={36}
         />
+        <p className="hint">
+          {' '}<button className="btn btn-ghost" onClick={clearGrid}>נקה</button>
+        </p>
       </div>
     </div>
   );
