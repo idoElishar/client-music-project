@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
-import Controls from "./components/Controls";
-import Grid from "./components/Grid";
+import Controls from "./components/pages/grid/Controls";
+import Grid from "./components/pages/grid/Grid";
 import useAudioEngine from "./hooks/useAudioEngine";
+import LogIn from "./components/pages/login/Login";
 
 export default function App() {
   const PIANO_NOTES = useMemo(() => ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"], []);
