@@ -4,7 +4,7 @@ export async function fetchSamplesMapping(instrument) {
   const url = `${API_BASE}/api/samples?instrument=${instrument}`;
   try {
     const res = await fetch(url);
-    if (res.ok) return await res.json(); 
+    if (res.ok) return await res.json();
     return { mapping: SAMPLE_MAPS[instrument] };
   } catch {
     return { mapping: SAMPLE_MAPS[instrument] };
@@ -12,13 +12,14 @@ export async function fetchSamplesMapping(instrument) {
 }
 
 export async function postSaveState(payload) {
-  const url = `${API_BASE}/api/save-sequencer`;
+  payload={ ...payload, userName: localStorage.getItem("username") }
+    const url = `${API_BASE}/api/save-sequencer`;
   try {
     const res = await fetch(url, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    if (res.ok) return await res.json(); 
+    if (res.ok) return await res.json();
     return { ok: false };
   } catch {
     return { ok: false };
@@ -27,15 +28,10 @@ export async function postSaveState(payload) {
 
 export async function getLatestState() {
   try {
-    const listRes = await fetch(`${API_BASE}/api/states?limit=1`);
+    const listRes = await fetch(`${API_BASE}/api/states/${localStorage.getItem("username")}`);
     if (!listRes.ok) return null;
     const listJson = await listRes.json();
-    const id = listJson?.items?.[0]?._id;
-    if (!id) return null;
-    const stateRes = await fetch(`${API_BASE}/api/state/${id}`);
-    if (!stateRes.ok) return null;
-    const stateJson = await stateRes.json();
-    return stateJson?.state || null;
+    return listJson.state;
   } catch {
     return null;
   }
@@ -43,7 +39,14 @@ export async function getLatestState() {
 
 export async function getStateById(id) {
   try {
-    const res = await fetch(`${API_BASE}/api/state/${id}`);
+    const qs = localStorage.getItem("username");
+    const res = await fetch(`${API_BASE}/api/state/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: qs }),
+    }); 
     if (!res.ok) return null;
     const json = await res.json();
     return json?.state || null;

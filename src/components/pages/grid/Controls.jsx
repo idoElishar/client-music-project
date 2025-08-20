@@ -20,7 +20,7 @@ export default function Controls({
       <div className="controlsGroup">{children}</div>
       <div className="controlsGroup">
         <label className="ctrl">
-          <span className="ctrlLabel">מספר צעדים</span>
+          <span className="ctrlLabel">מספר קלידים</span>
           <input
             type="number"
             min={1}
@@ -80,7 +80,7 @@ export default function Controls({
         <button onClick={onRewind} className="btn btnGhost">↺ להתחלה</button>
 
         <button
-          onClick={() => setLoopEnabled(v => !v)}
+          onClick={() => {setLoopEnabled(v => !v),onStop()}}
           className={`btn btnToggle ${loopEnabled ? "on" : "off"}`}
           title="הפעל/כבה לולאה"
         >
@@ -89,7 +89,6 @@ export default function Controls({
       </div>
 
       <div className="controlsGroup">
-       
 
         <button onClick={onSave} className="btn btnGhost">שמור מצב</button>
         <button onClick={onLoadLatest} className="btn btnGhost">טען מצב אחרון</button>

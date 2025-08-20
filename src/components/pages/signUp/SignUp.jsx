@@ -28,13 +28,11 @@ export default function SignUp() {
     isAdmin: false, 
   });
   const [passwordVerification, setPasswordVerification] = React.useState("");
-
   const [showPassword, setShowPassword] = React.useState(false);
   const [generalError, setGeneralError] = React.useState("");
   const [successMessage, setSuccessMessage] = React.useState("");
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-
   const [errorMessages, setErrorMessages] = React.useState({
     username: "",
     email: "",
