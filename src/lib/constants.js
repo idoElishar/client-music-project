@@ -1,4 +1,3 @@
-export const API_BASE = "http://localhost:8008";
 
 export const PIANO_NOTES  = ["C4","D4","E4","F4","G4","A4","B4","C5"];
 export const GUITAR_NOTES = ["E3","A3","D4","G4","B4","E5"];

@@ -1,4 +1,4 @@
-import { API_BASE } from "./constants";
+const API_BASE = import.meta.env.VITE_API_URL
 
 export async function fetchSamplesMapping(instrument) {
   const url = `${API_BASE}/api/samples?instrument=${instrument}`;

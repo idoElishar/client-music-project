@@ -10,7 +10,7 @@ import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { validateEmail,API_BASE,validatePassword } from "../../utilities/Utilities";
+import { validateEmail,validatePassword } from "../../utilities/Utilities";
 
 
 export default function LogIn() {
