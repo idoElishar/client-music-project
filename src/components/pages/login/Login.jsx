@@ -12,6 +12,9 @@ import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { validateEmail,validatePassword } from "../../utilities/Utilities";
 
+const API_BASE = import.meta.env.VITE_API_URL
+
+
 
 export default function LogIn() {
   const navigate = useNavigate();

@@ -15,8 +15,10 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import { validateEmail, validatePassword } from "../../utilities/Utilities";
+
+const API_BASE = import.meta.env.VITE_API_URL
+
 
 export default function SignUp() {
   const navigate = useNavigate();
